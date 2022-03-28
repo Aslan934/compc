@@ -147,7 +147,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 AUTH_USER_MODEL = "users.User"
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
