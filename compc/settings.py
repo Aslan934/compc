@@ -26,7 +26,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = '+$5y4icze-x-jjmolc4vy!xh4zje0&&9806907sq4%^8_&58z#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -148,7 +148,7 @@ LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/login/'
 AUTH_USER_MODEL = "users.User"
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 # LOGGING = {
 #     'version': 1,
