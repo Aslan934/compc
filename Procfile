@@ -1,0 +1,1 @@
+web: gunicorn compc.wsgi --log-file -
