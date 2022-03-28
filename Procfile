@@ -1,1 +1,1 @@
-web: gunicorn compc.wsgi --log-file -
+web: gunicorn compc.wsgi 
