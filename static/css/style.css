@@ -225,16 +225,7 @@ blockquote {
      margin-bottom: 25px;
 }
 
-.small_main_heading h2 {
-     padding: 2px 0 20px 0;
-     color: #114c7d;
-     font-weight: 400;
-     font-size: 28px;
-     background-image: url('../images/fevicon.png');
-     background-repeat: no-repeat;
-     padding-left: 55px;
-     letter-spacing: -0.5px;
-}
+
 
 .small_main_heading h2 strong {
      color: #38c8a8;
@@ -1065,30 +1056,9 @@ ul.top_icon li a {
      height: 100%;
 }
 
-.heroslider .slider-01 {
-     width: 100%;
-     background-image: url(../images/slider-01.jpg);
-     background-size: cover;
-     background-position: center;
-}
 
-.heroslider .slider-02 {
-     width: 100%;
-     background-image: url(../images/slider-02.jpg);
-     background-size: cover;
-     background-position: center;
-}
 
-.heroslider .slider-03 {
-     width: 100%;
-     background-image: url(../images/slider-03.jpg);
-     background-size: cover;
-     background-position: center;
-}
 
-.heroslider .slides li {
-     height: 600px;
-}
 
 .top-banner-slider .heroslider .slides li::before {
      content: "";
