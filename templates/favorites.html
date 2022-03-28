@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="brand-bg ">
+    <div class="container">
+        <div class="row">
+            {% for items in favorite_posts %}
+            <div class="col-md-6 col-lg-6 col-xl-3 margin">
+                <div class="brand_box text-center">
+
+                    <a href="{{ items.get_absolute_url }}">
+                        <img alt="{{items.photo.all.0.alt_text}}" src="/media/{{ items.photo.all.0.image}}">
+                    </a>
+
+                    <div class="thumb-content p-3" style="height:100%">
+                        <div class="h-25 d-inline-block">
+                            <h4 style="color:black;font-family:Arial, Helvetica, sans-serif">{{items.title}}</h4>
+                            <h4 style="color:black;font-family:Arial, Helvetica, sans-serif" class="item-price">
+                                <b>{{items.price}} &#8380</b></h4>
+                        </div>
+                        <div class="row justify-content-center mt-4" role="group">
+
+                            <form method="POST" action="{% url 'order:add_to_cart' items.slug %}">
+                                {% csrf_token %}
+                                <button name='add_to_cart' type="submit"
+                                    style='background-color:black; color:white; font-family:Arial, Helvetica, sans-serif'
+                                    class="btn btn-lg mr-1">Səbətə
+                                    at <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+                            </form>
+
+                            <form method="POST" action="{% url 'order:add_to_cart' items.slug %}">
+                                {% csrf_token %}
+                                <button href="#" class="btn btn-danger btn-lg"><i class="fa fa-heart"></i></button>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mb-5">
+
+    <!-- Current orders -->
+    <div class='row'>
+        <div class='col-lg-12'>
+            <a class="btn btn-outline-dark" href="{% url 'shop:index' %}">&#x2190;
+                Alış verişə davam edin</a>
+            <br><br>
+            <div class='box-element bg-light p-4'>
+
+                {% if messages %}
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-1">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            <p>{{ message }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                {% endif %}
+                <br>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th scope="col">Məhsullar</th>
+                            <th scope="col">Ad</th>
+                            <th scope="col">Say</th>
+                            <th scope="col">Qiymət</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for items in order.items.all %}
+                        <tr>
+                            <th style="max-width:30px;">
+                                <a href="{{ items.product.get_absolute_url }}" style="float: left;">
+                                    <img style="padding:5px; width: 150px;" alt="{{items.product.photo.all.0.alt_text}}"
+                                        src="/media/{{ items.product.photo.all.0.image}}">
+                                </a>
+
+                            </th>
+                            <th style="max-width:70px; word-wrap: break-word; ">
+                                <h3>
+                                    {{items.product}} </h3>
+                            </th>
+
+                            <th>
+                                <h3>{{items.quantity}} Ədəd</h3>
+                            </th>
+                            <th>
+                                <h3>{{items.get_final_price}} AZN</h3>
+                            </th>
+                            <form method="POST" action="{% url 'order:remove_from_cart' items.product.slug %}">
+                                {% csrf_token %}
+                                <th>
+                                    <button name='remove' type="submit"> <i style="font-size:24px"
+                                            class="fa">&#xf00d;</i>
+                                    </button>
+                                </th>
+                            </form>
+
+                        </tr>
+
+                        {% endfor %}
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <h2>
+                                <th>
+                                    <h3>Cəmi: {{order.get_total_price}}</h3>
+                                </th>
+                            </h2>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- <form method="POST" class="form-inline">
+                    {% csrf_token %}
+                    <h2>Zəhmət olmasa nömrənizi qeyd edin, tezliklə sizinlə əlqə saxlayacağıq. </h2>
+                    <div class="form-group mx-sm-3">
+
+                        <input name='phone_number' type=" text" placeholder="Əlaqə nömrəsi" class="form-control"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            required>
+                    </div>
+
+                    <button style=" width: 228px !important;" class=" btn btn-outline-danger " type=" submit">Sifarişi
+                        təsdiq edin</button>
+                </form> -->
+
+                <h1>Sifarişi təsdiqləyin</h1>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-sm-3">
+                            <input type="text" class="form-control-lg" placeholder="Ad">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <input type="text" class="form-control-lg" placeholder="Soyad">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <input name='phone_number' type=" text" placeholder="Əlaqə nömrəsi" class="form-control-lg"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                required> </div>
+                        <div class="form-group col-sm-3">
+                            <button type="submit" class=" btn btn-danger btn-lg">Təsdiq edin</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <!-- Confirmed Orders -->
+    <h1>Əvvəlki sifarişlər</h1>
+    {% for order in confirmed_order %}
+    <div class='row'>
+        <div class='col-lg-12'>
+            <div class='box-element bg-light p-5'>
+                <div class="row">
+                    <h2>Sifariş tarixi: {{order.date_ordered}}</h2>
+                    <div class="ml-5">
+                        <form method="POST" class="form-inline" action="{% url 'order:delete_order' order.id %}">
+                            {% csrf_token %}
+                            <button name='delete_order' style="width: 228px !important;" class="btn btn-outline-danger "
+                                type=" submit">Sifarişi
+                                Sil</button>
+                        </form>
+                    </div>
+                </div>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th scope="col">Məhsullar</th>
+                            <th scope="col">Ad</th>
+                            <th scope="col">Say</th>
+                            <th scope="col">Qiymət</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for items in order.items.all %}
+                        <tr>
+                            <th style="max-width:30px;">
+                                <a href="{{ items.product.get_absolute_url }}" style="float: left;">
+                                    <img style="padding:5px; width: 150px;" alt="{{items.product.photo.all.0.alt_text}}"
+                                        src="/media/{{ items.product.photo.all.0.image}}">
+                                </a>
+
+                            </th>
+                            <th style="max-width:70px; word-wrap: break-word; ">
+                                <h3>
+                                    {{items.product}} </h3>
+                            </th>
+
+                            <th>
+                                <h3>{{items.quantity}} Ədəd</h3>
+                            </th>
+                            <th>
+                                <h3>{{items.get_final_price}} AZN</h3>
+                            </th>
+
+                        </tr>
+
+                        {% endfor %}
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <h2>
+                                <th>
+                                    <h3>Cəmi: {{order.get_total_price}}</h3>
+                                </th>
+                            </h2>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+
+{% endblock content %}

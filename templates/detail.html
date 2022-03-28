@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+{% load social_share %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/easyzoom.css' %}">
+<link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<br>
+{% if messages %}
+<div class="row">
+    <div class="col-sm-12 col-sm-offset-1">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endif %}
+
+
+
+<div class="about">
+    <div class="container">
+        <div class="row bg-light p-5">
+            <div class="col-xl-5 col-lg-5 col-md-5 co-sm-5">
+                <div class="about_img mr-5">
+                    <div class="product__carousel">
+                        <div class="gallery-parent">
+                            <!-- SwiperJs and EasyZoom plugins start -->
+                            <div class="swiper-container gallery-top">
+                                <div class="swiper-wrapper">
+                                    {% for items in object.photo.all %}
+                                    <div class="swiper-slide easyzoom easyzoom--overlay">
+                                        <a href="{{items.image.url}}">
+                                            <img src="{{items.image.url}}" alt="" />
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Add Arrows -->
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
+                            </div>
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    {% for items in object.photo.all %}
+
+                                    <div class="swiper-slide">
+                                        <img src="{{items.image.url}}" alt="" />
+                                    </div>
+
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <!-- SwiperJs and EasyZoom plugins end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-7 co-sm-7 ">
+
+                <div class="about_box ml-5 ">
+
+
+                    {% for property in object.productspecificationvalue_set.all %}
+                    <h1>{{property.specification}}: {{property.value}}</h1>
+                    {% endfor %}
+
+
+                    <h2 class="ml-5" style="color: red;">{{object.price}} AZN</h2>
+
+                    {{object.description|safe}}
+                    <div class="row mt-4" role="group">
+
+                        <form method="POST" action="{% url 'order:add_to_cart' object.slug %}">
+                            {% csrf_token %}
+                            <button name='order_now' type="submit"
+                                style='background-color:black; color:white; font-family:Arial, Helvetica, sans-serif; width:300px'
+                                class="btn btn-lg mr-1 mb-2">İndi sifariş et <i class="fa fa-shopping-basket"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                        <form method="POST" action="{% url 'order:add_to_cart' object.slug %}">
+                            {% csrf_token %}
+                            <button name='add_to_cart' type="submit"
+                                style='border-color: black; background-color:white; color:black; font-family:Arial, Helvetica, sans-serif; width:240px'
+                                class="btn btn-lg mr-1">Səbətə
+                                at <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
+                        </form>
+
+                        <form method="POST" action="{% url 'order:add_to_cart' object.slug %}">
+                            {% csrf_token %}
+                            <button href="#" class="btn btn-danger btn-lg"><i class="fa fa-heart"></i></button>
+                        </form>
+
+                        <br>
+
+                    </div><br>
+                    <div class="row ml-1">
+                        <h1 class="mr-5">Paylaş:</h1>
+
+                        <a target="_blank"
+                            href='https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}%0D%0A{{object.name}}'>
+                            <h1 class="mr-5">Whatsapp</h1>
+                        </a>
+
+
+                        <a target="_blank"
+                            href="https://t.me/share/url?text={{object.name}}&url={{ request.build_absolute_uri }}">
+                            <h1 class="mr-5">Telegram</h1>
+                        </a>
+                    </div>
+
+                    <h1 class="location_icon mr-5">Əlaqə saxlayın:</h1>
+
+                    <a target="_blank" href='https://api.whatsapp.com/send?phone=+994707031676'>
+                        <h1 class="mr-5"><i class="fa fa-whatsapp"></i> +994707031676</h1>
+                    </a>
+                    <a target="_blank" href='https://api.whatsapp.com/send?phone=+994707031676'>
+                        <h1 class="mr-5"><i class="fa fa-whatsapp"></i> +994707031676</h1>
+                    </a>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock content %}
+{% block javascript %}
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/easyzoom.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock javascript %}
