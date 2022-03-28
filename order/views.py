@@ -29,6 +29,8 @@ def cart(request):
     if request.method == 'POST':
         if new_order.items.exists():
             new_order.phone_number = request.POST['phone_number']
+            new_order.name = request.POST['name']
+            new_order.surname = request.POST['surname']
             new_order.ordered = True
             new_order.save()
             messages.info(request, 'Sifarişiniz qeydə alındı')

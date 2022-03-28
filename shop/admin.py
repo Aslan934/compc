@@ -25,10 +25,14 @@ class ProductAdmin(admin.ModelAdmin):
         ProductImageInline, ProductSpecificationValueInline
     ]
 
-    list_display = ('title', 'get_model', 'price', 'created_at')
+    list_filter = ('category',)
+    list_display = ('title', 'category', 'price', 'created_at')
     search_fields = ['title']
 
     def get_model(self, obj):
         return models.ProductSpecificationValue.objects.get(specification__name__contains='model', product=obj)
 
     get_model.short_description = 'Model'
+
+
+admin.site.register(models.Banner)

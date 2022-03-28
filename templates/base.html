@@ -60,7 +60,7 @@
                                 <nav class="main-menu">
                                     <ul class="menu-area-main" style="font-size: 25px">
                                         <li class="active"> <a href="{% url 'shop:index' %}">Home</a> </li>
-                                        <li> <a href="contact.html">Əlaqə</a> </li>
+                                        <li> <a href="{% url 'shop:contact' %}">Əlaqə</a> </li>
 
                                         <li><a href="{% url 'shop:favorite_list' %}"><i class="fa fa-heart"></i>
                                                 Bəyəndiklərim</a></li>
@@ -143,15 +143,16 @@
         {% endblock slider %}
     </div>
 
-    <div class="container" style="margin-bottom: 200px !important">
+    <div class="container mb-5">
 
         {% block content %}
 
-        {% endblock content %}</div>
+        {% endblock content %}
+    </div>
 
     <!-- footer -->
     <footer>
-        <div id="contact" class="footer">
+        <div id=" contact" class="footer">
             <div class="container">
                 <div class="row pdn-top-30">
                     <div class="col-md-12">
@@ -162,15 +163,17 @@
                                     +994) 70 703 16 76</p>
                             </div>
                             <ul class="location_icon">
-                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                <li><a href="href='https://api.whatsapp.com/send?phone=+994707031676"><i
+                                <li><a target="_blank" href="https://www.facebook.com/CompC-104025081516059"><i
+                                            class="fa fa-facebook-f"></i></a></li>
+                                <li><a target="_blank" href="https://api.whatsapp.com/send?phone=+994707031676"><i
                                             class="fa fa-whatsapp"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a target="_blank" href="https://www.instagram.com/compc_/"><i
+                                            class="fa fa-instagram"></i></a></li>
                             </ul>
                             <div class="menu-bottom">
                                 <ul class="link">
                                     <li class="active"> <a href="{% url 'shop:index' %}">Home</a> </li>
-                                    <li> <a href="contact.html">Əlaqə</a> </li>
+                                    <li> <a href="{% url 'shop:contact' %}">Əlaqə</a> </li>
 
                                     <li><a href="{% url 'shop:favorite_list' %}"><i class="fa fa-heart"></i>
                                             Bəyəndiklərim</a></li>

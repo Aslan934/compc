@@ -13,7 +13,7 @@ class Category(models.Model):
                             unique=True)
     image = models.ImageField(verbose_name='Şəkil',
                               null=True, blank=True, default='')
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name', unique=True)
 
     class Meta:
         verbose_name = "Kateqoriya"
@@ -43,7 +43,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
     title = models.CharField(verbose_name="Ad", max_length=255)
     description = RichTextField(verbose_name='Məzmun', blank=True)
-    slug = AutoSlugField(populate_from='title')
+    slug = AutoSlugField(populate_from='title', unique=True)
     favourites = models.ManyToManyField(
         User, related_name='favourites', default=None, blank=True)
     price = models.DecimalField(
@@ -116,3 +116,17 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = 'Məhsulun şəkili'
         verbose_name_plural = 'Məhsulun şəkilləri'
+
+
+class Banner(models.Model):
+    image = models.ImageField(
+        verbose_name='Banner: 1920x420', null=True, blank=True)
+
+    is_active = models.BooleanField(verbose_name="First banner", default=False)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=255, blank=False,)
+    phone_number = models.CharField(max_length=50)
+    message = models.TextField()

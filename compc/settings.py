@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -21,6 +22,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY = '+$5y4icze-x-jjmolc4vy!xh4zje0&&9806907sq4%^8_&58z#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -113,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'az-Az'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC+4'
 
 USE_I18N = True
 
@@ -141,3 +143,5 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/login/'
 AUTH_USER_MODEL = "users.User"
+
+django_heroku.settings(locals())

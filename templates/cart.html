@@ -4,7 +4,7 @@
 <div class="container mb-5">
 
     <!-- Current orders -->
-    <div class='row'>
+    <div class='row text-center'>
         <div class='col-lg-12'>
             <a class="btn btn-outline-dark" href="{% url 'shop:index' %}">&#x2190;
                 Alış verişə davam edin</a>
@@ -13,10 +13,10 @@
 
                 {% if messages %}
                 <div class="row">
-                    <div class="col-sm-12 col-sm-offset-1">
+                    <div class="col-sm-12 col-sm-offset-1 text-center">
                         {% for message in messages %}
                         <div class="alert alert-{{ message.tags }}" role="alert">
-                            <p>{{ message }}</p>
+                            <h3>{{ message }}</h3>
                         </div>
                         {% endfor %}
                     </div>
@@ -58,7 +58,7 @@
                             <form method="POST" action="{% url 'order:remove_from_cart' items.product.slug %}">
                                 {% csrf_token %}
                                 <th>
-                                    <button name='remove' type="submit"> <i style="font-size:24px"
+                                    <button name='remove' type="submit" class="btn"> <i style="font-size:24px"
                                             class="fa">&#xf00d;</i>
                                     </button>
                                 </th>
@@ -79,36 +79,23 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <!-- <form method="POST" class="form-inline">
-                    {% csrf_token %}
-                    <h2>Zəhmət olmasa nömrənizi qeyd edin, tezliklə sizinlə əlqə saxlayacağıq. </h2>
-                    <div class="form-group mx-sm-3">
-
-                        <input name='phone_number' type=" text" placeholder="Əlaqə nömrəsi" class="form-control"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                            required>
-                    </div>
-
-                    <button style=" width: 228px !important;" class=" btn btn-outline-danger " type=" submit">Sifarişi
-                        təsdiq edin</button>
-                </form> -->
-
                 <h1>Sifarişi təsdiqləyin</h1>
-                <form>
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-sm-3">
-                            <input type="text" class="form-control-lg" placeholder="Ad">
+                            <input name="name" type="text" class="form-control form-control-lg" placeholder="Ad">
                         </div>
                         <div class="form-group col-sm-3">
-                            <input type="text" class="form-control-lg" placeholder="Soyad">
+                            <input name="surname" type="text" class="form-control form-control-lg" placeholder="Soyad">
                         </div>
                         <div class="form-group col-sm-3">
-                            <input name='phone_number' type=" text" placeholder="Əlaqə nömrəsi" class="form-control-lg"
+                            <input name='phone_number' type=" text" placeholder="Əlaqə nömrəsi"
+                                class="form-control form-control-lg"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                                 required> </div>
                         <div class="form-group col-sm-3">
-                            <button type="submit" class=" btn btn-danger btn-lg">Təsdiq edin</button>
+                            <button type="submit" class=" btn btn-danger btn-lg btn-block">Təsdiq edin</button>
                         </div>
                     </div>
 

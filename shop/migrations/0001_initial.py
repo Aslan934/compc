@@ -18,9 +18,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='Kateqoriya')),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='name')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255,
+                 unique=True, verbose_name='Kateqoriya')),
+                ('slug', autoslug.fields.AutoSlugField(
+                    editable=False, populate_from='name')),
             ],
             options={
                 'verbose_name': 'Kateqoriya',
@@ -30,16 +33,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255, verbose_name='Ad')),
-                ('description', ckeditor.fields.RichTextField(blank=True, verbose_name='Məzmun')),
-                ('slug', autoslug.fields.AutoSlugField(editable=False, populate_from='title')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=5, verbose_name='Qiymət')),
-                ('discount_price', models.DecimalField(blank=True, decimal_places=2, default=None, max_digits=5, verbose_name='Endirimli qiymət')),
-                ('is_active', models.BooleanField(default=True, verbose_name='Məhsulun aktivliyi')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Əlavə edilmə tarixi')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Yenilənmə tarixi')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='shop.category')),
+                ('description', ckeditor.fields.RichTextField(
+                    blank=True, verbose_name='Məzmun')),
+                ('slug', autoslug.fields.AutoSlugField(
+                    editable=False, populate_from='title')),
+                ('price', models.DecimalField(decimal_places=2,
+                 max_digits=5, verbose_name='Qiymət')),
+                ('discount_price', models.DecimalField(blank=True, decimal_places=2,
+                 default=None, max_digits=5, verbose_name='Endirimli qiymət')),
+                ('is_active', models.BooleanField(
+                    default=True, verbose_name='Məhsulun aktivliyi')),
+                ('created_at', models.DateTimeField(
+                    auto_now_add=True, verbose_name='Əlavə edilmə tarixi')),
+                ('updated_at', models.DateTimeField(
+                    auto_now=True, verbose_name='Yenilənmə tarixi')),
+                ('category', models.ForeignKey(
+                    on_delete=django.db.models.deletion.RESTRICT, to='shop.category')),
             ],
             options={
                 'verbose_name': 'Məhsul',
@@ -50,9 +62,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProductSpecification',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, verbose_name='Ad')),
-                ('product_type', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='shop.category')),
+                ('product_type', models.ForeignKey(
+                    on_delete=django.db.models.deletion.RESTRICT, to='shop.category')),
             ],
             options={
                 'verbose_name': 'Məhsulun xüsusiyyəti',
@@ -62,10 +76,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProductSpecificationValue',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('value', models.CharField(max_length=255, verbose_name='Value')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.product')),
-                ('specification', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='shop.productspecification')),
+                ('product', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='shop.product')),
+                ('specification', models.ForeignKey(
+                    on_delete=django.db.models.deletion.RESTRICT, to='shop.productspecification')),
             ],
             options={
                 'verbose_name': 'Məhsulun xüsusiyyətinin dəyərləri',
@@ -74,11 +91,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ProductImage',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, null=True, upload_to=shop.models.get_image_filename, verbose_name='Şəkil')),
-                ('alt_text', models.CharField(blank=True, max_length=50, null=True, verbose_name='Alternativ text')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('image', models.ImageField(blank=True, null=True,
+                 upload_to=shop.models.get_image_filename, verbose_name='Şəkil')),
+                ('alt_text', models.CharField(blank=True, max_length=50,
+                 null=True, verbose_name='Alternativ text')),
                 ('is_feature', models.BooleanField(default=False)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='photo', to='shop.product')),
+                ('product', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, related_name='photo', to='shop.product')),
             ],
             options={
                 'verbose_name': 'Məhsulun şəkili',

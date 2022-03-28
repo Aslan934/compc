@@ -8,10 +8,10 @@
 <br>
 {% if messages %}
 <div class="row">
-    <div class="col-sm-12 col-sm-offset-1">
+    <div class="col-sm-12 col-sm-offset-1 text-center">
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }}" role="alert">
-            <p>{{ message }}</p>
+            <h3>{{ message }}</h3>
         </div>
         {% endfor %}
     </div>
@@ -46,9 +46,10 @@
                                     at <i class="fa fa-shopping-basket" aria-hidden="true"></i></button>
                             </form>
 
-                            <form method="POST" action="{% url 'order:add_to_cart' items.slug %}">
+                            <form method="POST" action="{% url 'shop:add_to_favorites' items.slug %}">
                                 {% csrf_token %}
-                                <button href="#" class="btn btn-danger btn-lg"><i class="fa fa-heart"></i></button>
+                                <button name='add_to_favorites' class="btn btn-danger btn-lg"><i
+                                        class="fa fa-heart"></i></button>
                             </form>
 
                         </div>
@@ -61,6 +62,7 @@
 
         </div>
     </div>
+
 </div>
 
 

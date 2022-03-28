@@ -30,6 +30,8 @@ class OrderItem(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=50)
+    surname = models.CharField(blank=True, max_length=50)
     items = models.ManyToManyField(OrderItem)
     date_ordered = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
