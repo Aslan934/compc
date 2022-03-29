@@ -15,6 +15,9 @@ class Category(models.Model):
                               null=True, blank=True, default='')
     slug = AutoSlugField(populate_from='name', unique=True)
 
+    created_at = models.DateTimeField(
+        verbose_name='Əlavə edilmə tarixi', auto_now_add=True)
+
     class Meta:
         verbose_name = "Kateqoriya"
         verbose_name_plural = "Kateqoriyalar"

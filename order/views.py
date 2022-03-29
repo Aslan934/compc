@@ -44,7 +44,6 @@ def cart(request):
 def add_to_cart(request, slug):
     if request.method == 'POST':
         if 'add_to_cart' or 'order_now' in request.POST:
-            print(1111111)
             if request.user.is_authenticated:
                 order_qs = Order.objects.get_or_create(
                     user=request.user, ordered=False)

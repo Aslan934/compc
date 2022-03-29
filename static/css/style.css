@@ -1015,19 +1015,7 @@ ul.top_icon li a {
 }
 
 /*--------------------------------------------------------------------- top banner area ---------------------------------------------------------------------*/
-.top-banner-slider {
-     overflow: hidden;
-     clear: both;
-     height: 600px;
-}
 
-.top-banner-slider .heroslider {
-     margin: 0px;
-     padding: 0px;
-     border: none;
-     position: relative;
-     border-radius: 0;
-}
 
 .swiper-overlay {
      height: 100%;
@@ -1043,42 +1031,11 @@ ul.top_icon li a {
      top: 0px;
 }
 
-.heroslider .container {
-     position: relative;
-     height: 100%;
-     padding-left: 0;
-     padding-right: 0;
-     z-index: 5;
-}
-
 .swiper-container {
      width: 100%;
      height: 100%;
 }
 
-
-
-
-
-.top-banner-slider .heroslider .slides li::before {
-     content: "";
-     position: absolute;
-     background: rgba(0, 0, 0, 0.4);
-     height: 100%;
-     width: 100%;
-     left: 0px;
-     top: 0px;
-}
-
-.top-banner-slider .flex_caption3 {
-     position: absolute;
-     z-index: 30;
-     left: 0;
-     right: 0;
-     bottom: 50px;
-     margin: 0 -15px;
-     display: flex;
-}
 
 a.slide_banner {
      position: relative;
@@ -1098,70 +1055,6 @@ a.slide_banner {
      width: 270px;
 }
 
-.top-banner-slider .flex_caption1 {
-     text-align: center;
-     position: absolute;
-     z-index: 30;
-     left: 0;
-     right: 0;
-     margin: 0 auto;
-     top: 31%;
-     max-width: 720px;
-     width: 100%;
-     text-transform: uppercase;
-     color: #333;
-}
-
-.top-banner-slider .flex_caption1 .title1 {
-     font-size: 36px;
-     font-weight: 300;
-     color: #ffffff;
-}
-
-.top-banner-slider .flex_caption1 .title2 {
-     font-size: 60px;
-     font-weight: 900;
-     color: #ffffff;
-}
-
-.top-banner-slider .flex_caption2 {
-     text-align: center;
-}
-
-.top-banner-slider .flex_caption2 {
-     position: absolute;
-     z-index: 30;
-     left: 0;
-     top: 20%;
-     display: table;
-     width: 177px;
-     height: 177px;
-     background-color: #242424;
-}
-
-.top-banner-slider .flex_caption2 .middle {
-     display: table-cell;
-     vertical-align: middle;
-     text-transform: uppercase;
-     text-align: center;
-     font-weight: 700;
-     line-height: 31px;
-     font-size: 26px;
-     color: #fff;
-     transition: all 0.1s ease-in-out;
-     -webkit-transition: all 0.1s ease-in-out;
-}
-
-.top-banner-slider .flex_caption2 .middle:hover {
-     background: #38c8a8;
-}
-
-.top-banner-slider .flex_caption2 span {
-     display: block;
-     font-weight: 100;
-     line-height: 36px;
-     font-size: 34px;
-}
 
 a.slide_banner::before {
      content: '';
@@ -1201,16 +1094,6 @@ a.slide_banner:hover::before {
 
 .flex-control-paging li a.flex-active {
      border: 2px solid #ffffff;
-}
-
-
-
-.heroslider:hover .flex-direction-nav .flex-prev:hover {
-     background: #38c8a8;
-}
-
-.heroslider:hover .flex-direction-nav .flex-next:hover {
-     background: #38c8a8;
 }
 
 
