@@ -42,23 +42,24 @@ def cart(request):
 
 
 def add_to_cart(request, slug):
-    if request.method == 'POST' and ('add_to_cart' or 'order_now') in request.POST:
+    if request.method == 'POST':
+        if 'add_to_cart' or 'order_now' in request.POST:
+            print(1111111)
+            if request.user.is_authenticated:
+                order_qs = Order.objects.get_or_create(
+                    user=request.user, ordered=False)
+            else:
 
-        if request.user.is_authenticated:
-            order_qs = Order.objects.get_or_create(
-                user=request.user, ordered=False)
-        else:
+                if not request.session.exists(request.session.session_key):
+                    request.session.create()
 
-            if not request.session.exists(request.session.session_key):
-                request.session.create()
+                order_qs = Order.objects.get_or_create(
+                    user=None, session_key=request.session.session_key, ordered=False)
 
-            order_qs = Order.objects.get_or_create(
-                user=None, session_key=request.session.session_key, ordered=False)
+            order = order_qs[0]
+            item = get_object_or_404(Product, slug=slug)
 
-        order = order_qs[0]
-        item = get_object_or_404(Product, slug=slug)
-
-        order_item, created = order.items.all().get_or_create(product=item)
+            order_item, created = order.items.all().get_or_create(product=item)
 
         if order.items.filter(product__slug=item.slug).exists():
             order_item.quantity += 1
