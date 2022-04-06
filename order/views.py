@@ -5,6 +5,7 @@ from shop.models import Product
 from django.contrib import messages
 from datetime import timezone
 from order.forms import OrderForm
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def cart(request):
@@ -76,22 +77,24 @@ def add_to_cart(request, slug):
 
 def remove_from_cart(request, slug):
     if request.method == 'POST' and 'remove' in request.POST:
+        try:
+            if request.user.is_authenticated:
+                order = Order.objects.get(user=request.user, ordered=False)
+            else:
+                order = Order.objects.get(
+                    user=None, session_key=request.session.session_key, ordered=False)
 
-        if request.user.is_authenticated:
-            order = Order.objects.get(user=request.user, ordered=False)
-        else:
-            order = Order.objects.get(
-                user=None, session_key=request.session.session_key, ordered=False)
+            item = get_object_or_404(Product, slug=slug)
+            order_item = order.items.all().get(product=item)
 
-        item = get_object_or_404(Product, slug=slug)
-        order_item = order.items.all().get(product=item)
+            if order.items.filter(product__slug=item.slug).exists():
+                order_item.delete()
+                messages.info(request, "Məhsul səbətdən silindi.")
+                return redirect("order:cart")
 
-        if order.items.filter(product__slug=item.slug).exists():
-            order_item.delete()
-            messages.info(request, "Məhsul səbətdən silindi.")
-        else:
+        except ObjectDoesNotExist:
             messages.info(request, "Məhsul səbətdən mövcud deyil")
-        return redirect("order:cart")
+
     else:
         messages.info(request, "Sifarişiniz yoxdur")
     return redirect('order:cart')

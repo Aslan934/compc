@@ -74,10 +74,10 @@
                     <h1>{{property.specification}}: {{property.value}}</h1>
                     {% endfor %}
 
+                    <h2>{{object.description|safe}}</h2>
 
                     <h2 class="ml-5" style="color: red;">{{object.price}} AZN</h2>
 
-                    {{object.description|safe}}
                     <div class="row mt-4" role="group">
 
                         <form method="POST" action="{% url 'order:add_to_cart' object.slug %}">

@@ -18,4 +18,4 @@ def order_items_quantity(request):
 
 
 def categories(request):
-    return {'categories': Category.objects.order_by('-created_at')}
+    return {'categories': Category.objects.order_by('created_at')}
