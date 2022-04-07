@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['compc.pythonanywhere.com', '127.0.0.1']
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS",
